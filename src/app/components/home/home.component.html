@@ -1,0 +1,52 @@
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-9">
+        </div>
+        <div class="col-md-3"> 
+            <h6 class="ms-4">Search_Product</h6>
+            <input class="form-control btn btn-light ms-3 text-start" type="search" placeholder="Search" [(ngModel)]="searchText" aria-label="Search">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <h2 class="text-center">All Products</h2>
+            <a routerLink="/addproduct" class="btn btn-success">Add Product</a>
+
+            <table class="table table-striped table-bordered rounded mt-4">
+                <thead class=" text-center">
+                    <tr>
+                        <th>SR.NO</th>
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th>Qty</th>
+                        <th>Discription</th>
+                        <th>Image</th>
+                        <th>Action</th>
+                    </tr>
+
+                </thead>
+                <tbody class="text-center prevent-select">
+                    <tr *ngFor="let product of productData|search:searchText let i=index">
+                        <td>{{i+1}}</td>
+                        <td>{{product.name}}</td>
+                        <td>{{product.price}}</td>
+                        <td>{{product.qty}}</td>
+                        <td style="width: 300px; text-align: left;">{{product.desc}}</td>
+                        <td> <img src={{product.image}} class="card-img-top prevent-select p-2" alt="..."
+                                style="height:100px ;width: 100px;">
+                        </td>
+                        <td style="width: 150px;">
+                            <a class="btn btn-success fs-6 prevent-select mt-3"  [routerLink]="['/viewproduct',product._id]">
+                                <i class="fa fa-eye"></i></a>
+                            <button class="btn btn-danger fs-6 ms-1 mt-3" (click)="delPro(product._id)"> <i
+                                    class="fa fa-trash"></i></button>
+                            <a class="btn btn-primary fs-6 ms-1 prevent-select mt-3" [routerLink]="['/editproduct',product._id]">
+                                <i class="fa fa-edit"></i></a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
